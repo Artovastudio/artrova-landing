@@ -1,0 +1,28 @@
+{
+  "title": "حلول الوحدات الجاهزة والكرفانات",
+  "subtitle": "قريباً",
+  "description": "نقدم حلول متكاملة للوحدات الجاهزة والكرفانات السكنية والتجارية بأعلى معايير الجودة والراحة",
+  "status": "coming_soon",
+  "features": [
+    {
+      "title": "كرفانات سكنية",
+      "description": "وحدات سكنية متنقلة مجهزة بالكامل",
+      "image": "caravan-residential.jpg"
+    },
+    {
+      "title": "كرفانات مكتبية",
+      "description": "مكاتب متنقلة احترافية للشركات",
+      "image": "caravan-office.jpg"
+    },
+    {
+      "title": "وحدات استقبال",
+      "description": "وحدات استقبال فاخرة للفعاليات",
+      "image": "caravan-reception.jpg"
+    },
+    {
+      "title": "كرفانات الحراسة",
+      "description": "نقاط حراسة مجهزة ومريحة",
+      "image": "caravan-security.jpg"
+    }
+  ]
+}

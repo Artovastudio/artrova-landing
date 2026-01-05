@@ -1,0 +1,14 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon/Symbol -->
+  <g id="icon">
+    <circle cx="30" cy="30" r="26" stroke="#c9a962" stroke-width="2" fill="none"/>
+    <path d="M30 10L18 46H23L25.5 39H34.5L37 46H42L30 10Z" fill="#c9a962"/>
+    <path d="M27 34L30 25L33 34H27Z" fill="#1a1a1a"/>
+  </g>
+  
+  <!-- Text: ARTROVA -->
+  <g id="text" fill="#1a1a1a">
+    <text x="65" y="38" font-family="'Playfair Display', serif" font-size="24" font-weight="700">ARTROVA</text>
+    <text x="65" y="50" font-family="'Montserrat', sans-serif" font-size="10" font-weight="400" letter-spacing="2" fill="#c9a962">STUDIO</text>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="#1a1a1a" rx="8"/>
+  <text x="32" y="44" font-family="Playfair Display" font-size="32" font-weight="700" 
+        fill="#c9a962" text-anchor="middle">A</text>
+</svg>
