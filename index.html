@@ -1682,7 +1682,7 @@
                 <template x-for="project in filteredProjects" :key="project.id">
                     <div class="portfolio-item"
                          role="article"
-                         :aria-label="project.title + ' - ' + project.location"></div>
+                         :aria-label="project.title + ' - ' + project.location">
                         <img 
                             :src="project.image" 
                             :alt="language === 'ar'
