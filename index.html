@@ -539,6 +539,19 @@
             border: 1px solid #f1e4ec;
         }
 
+        /* محاذاة إحصائيات الهيرو في سطر واحد على الموبايل */
+        @media (max-width: 768px) {
+            .hero-stats {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                gap: 16px;
+            }
+            .hero-stat-item {
+                flex: 1 1 0;
+                justify-content: center;
+            }
+        }
+
 
         /* قسم من نحن - محسّن */
         .about-section { 
@@ -870,6 +883,12 @@
         .contact-details a {
             color: #666;
             line-height: 1.7;
+        }
+        /* عرض أرقام الهاتف بالاتجاه الصحيح داخل اللغة العربية */
+        .contact-details a {
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            display: inline-block;
         }
         .contact-details a:hover {
             color: var(--primary);
@@ -1369,7 +1388,7 @@
     <header class="main-header" :class="{ 'scrolled': scrolled }">
         <div class="container nav-container">
             <a href="#home" class="logo">
-                <img src="assets/logo.svg" alt="Artrova Studio">
+                <img src="assets/artrova-logo.png" alt="Artrova Studio">
             </a>
 
             <nav class="nav-menu">
@@ -1885,7 +1904,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <img src="assets/logo.svg" alt="Artrova Studio" class="footer-logo">
+                    <img src="assets/artrova-logo.png" alt="Artrova Studio" class="footer-logo">
                     <p x-text="language === 'ar' 
                         ? 'نحول المساحات الصامتة إلى أماكن تنبض بالحياة من خلال دمج الفن بالهندسة المعمارية.'
                         : 'We transform silent spaces into vibrant places by blending art with architecture.'"></p>
