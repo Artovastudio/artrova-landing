@@ -368,7 +368,7 @@
             color: var(--primary);
         }
 
-        /* إحصائيات الهوم بشكل خفيف وبصري */
+        /* إحصائيات الهوم بشكل خفيف وبصري (ثلاث أعمدة في الديسكتوب) */
         .hero-stats {
             margin-top: 36px;
             display: flex;
@@ -545,16 +545,28 @@
             border: 1px solid #f1e4ec;
         }
 
-        /* ضبط أحصائيات الهيرو كأعمدة رأسية متجاورة في كل المقاسات */
-        @media (max-width: 480px) {
+        /* في الموبايل: ترتيب الإحصائيات كسطور رأسية (أيقونة + رقم + نص) للحصول على تجربة أوضح */
+        @media (max-width: 768px) {
             .hero-stats {
-                gap: 16px;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: stretch;
+                gap: 18px;
+            }
+            .hero-stat-item {
+                flex-direction: row;
+                justify-content: flex-start;
+                text-align: right;
+                gap: 10px;
+            }
+            .hero-stat-icon {
+                flex-shrink: 0;
             }
             .hero-stat-number {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             .hero-stat-label {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
         }
 
