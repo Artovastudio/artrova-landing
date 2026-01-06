@@ -545,28 +545,26 @@
             border: 1px solid #f1e4ec;
         }
 
-        /* في الموبايل: ترتيب الإحصائيات كسطور رأسية (أيقونة + رقم + نص) للحصول على تجربة أوضح */
+        /* في الموبايل: إبقاء الإحصائيات الثلاث في سطر واحد (3 أعمدة) مع تصغير النص */
         @media (max-width: 768px) {
             .hero-stats {
-                flex-direction: column;
                 flex-wrap: nowrap;
-                align-items: stretch;
-                gap: 18px;
-            }
-            .hero-stat-item {
-                flex-direction: row;
-                justify-content: flex-start;
-                text-align: right;
+                justify-content: space-between;
                 gap: 10px;
             }
-            .hero-stat-icon {
-                flex-shrink: 0;
+            .hero-stat-item {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                flex: 1 1 0;
+                gap: 4px;
             }
             .hero-stat-number {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
             .hero-stat-label {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
         }
 
