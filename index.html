@@ -368,42 +368,30 @@
             color: var(--primary);
         }
 
-        /* إحصائيات الهوم - تصميم جديد: موبايل أولاً (صفوف)، وديسكتوب أعمدة */
+        /* إحصائيات الهوم - شريط أرقام نظيف يشبه Valore Studio */
         .hero-stats {
             margin-top: 36px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            align-items: start;
+            text-align: center;
         }
         .hero-stat-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            text-align: right;
-        }
-        .hero-stat-content {
-            display: flex;
             flex-direction: column;
-            gap: 2px;
-        }
-        .hero-stat-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: #fff7fb;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-        .hero-stat-content {
-            text-align: right;
+            gap: 6px;
         }
         .hero-stat-number {
-            font-size: 1.5rem;
+            display: inline-block;
+            padding: 4px 18px;
+            border-left: 2px solid var(--primary);
+            border-right: 2px solid var(--primary);
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 2px;
+            letter-spacing: 0.03em;
         }
         .hero-stat-label {
             font-size: 0.95rem;
@@ -546,13 +534,18 @@
             border: 1px solid #f1e4ec;
         }
 
-        /* على الشاشات الأوسع (تابلت / ديسكتوب): عرض الإحصائيات في 3 أعمدة مع بقاء الأيقونة بمحاذاة النص */
-        @media (min-width: 768px) {
+        /* موبايل: تكديس الإحصائيات مع تقليل المسافات، مع بقاء النمط نفسه */
+        @media (max-width: 768px) {
             .hero-stats {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 24px;
-                align-items: start;
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .hero-stat-number {
+                font-size: 1.4rem;
+                padding-inline: 14px;
+            }
+            .hero-stat-label {
+                font-size: 0.9rem;
             }
         }
 
