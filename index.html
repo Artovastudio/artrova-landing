@@ -100,16 +100,35 @@
         ul { list-style: none; }
         img { max-width: 100%; display: block; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .btn { padding: 12px 30px; border-radius: 999px; font-weight: 600; cursor: pointer; display: inline-block; transition: var(--transition); border: none; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: #ab8a4a; transform: translateY(-3px); }
-        .btn-outline { 
+        .btn {
+            padding: 12px 30px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 0 0 rgba(0,0,0,0);
+        }
+        .btn-primary {
             background: var(--primary);
             color: white;
         }
+        .btn-primary:hover {
+            background: #ab8a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+        .btn-outline { 
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid rgba(197,160,89,0.6);
+        }
         .btn-outline:hover { 
-            background: #ab8a4a; 
-            transform: translateY(-3px);
+            background: rgba(197,160,89,0.06);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
         }
 
         /* الهيدر المحسن مع أيقونات قابلة للنقر */
@@ -120,6 +139,18 @@
             transition: var(--transition);
             background: rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
+        }
+
+        /* حركات خفيفة جدًا لعناصر مختارة (fade + تحريك بسيط لأعلى) */
+        @keyframes fade-soft-up {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .main-header.scrolled {
             background: rgba(255, 255, 255, 0.98);
@@ -564,7 +595,7 @@
 
         /* قسم من نحن - محسّن */
         .about-section { 
-            padding: 100px 0; 
+            padding: 90px 0; 
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%); 
         }
         .section-header {
@@ -609,6 +640,7 @@
             border-radius: 18px;
             box-shadow: 0 12px 30px rgba(0,0,0,0.06);
             border: 1px solid #f1e4ec;
+            animation: fade-soft-up 0.6s ease-out both;
         }
         .about-content h3 {
             color: var(--primary);
@@ -671,8 +703,9 @@
 
         /* قسم الخدمات */
         .services-section {
-            padding: 100px 0;
+            padding: 90px 0;
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%);
+            margin-top: 40px;
         }
         .services-grid {
             display: grid;
@@ -686,6 +719,7 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: var(--transition);
+            animation: fade-soft-up 0.55s ease-out both;
         }
         .service-card:hover {
             transform: translateY(-10px);
@@ -707,8 +741,9 @@
 
         /* قسم المشاريع */
         .portfolio-section { 
-            padding: 100px 0; 
+            padding: 90px 0; 
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%); 
+            margin-top: 40px;
         }
         .portfolio-filter {
             display: flex;
@@ -734,8 +769,9 @@
         }
         .portfolio-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 30px; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 28px; 
+            align-items: stretch;
         }
         .portfolio-item { 
             position: relative; 
@@ -744,11 +780,13 @@
             background: white; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             cursor: pointer;
+            animation: fade-soft-up 0.6s ease-out both;
         }
         .portfolio-item img { 
             width: 100%; 
-            aspect-ratio: 4/5;
+            aspect-ratio: 4 / 3;
             object-fit: cover; 
+            border-radius: 12px 12px 0 0;
             transition: transform 0.5s ease;
         }
         .portfolio-item:hover img { 
@@ -773,7 +811,7 @@
         .portfolio-overlay h3 {
             font-size: 1.5rem;
             margin-bottom: 5px;
-            display: none;
+            display: block;
         }
         .portfolio-overlay p {
             font-size: 0.95rem;
@@ -783,9 +821,10 @@
 
         /* قسم الوحدات الجاهزة - تصميم محسّن */
         .future-section {
-            padding: 100px 0;
+            padding: 90px 0;
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%);
             color: #333;
+            margin-top: 40px;
         }
         .future-section .section-header {
             max-width: 680px;
@@ -820,6 +859,7 @@
             border: 1px solid #f1e4ec;
             box-shadow: 0 10px 24px rgba(0,0,0,0.08);
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            animation: fade-soft-up 0.6s ease-out both;
         }
         .future-card:hover {
             transform: translateY(-8px);
@@ -852,8 +892,9 @@
 
         /* قسم الاتصال */
         .contact-section {
-            padding: 100px 0;
+            padding: 90px 0;
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%);
+            margin-top: 40px;
         }
         .contact-grid {
             display: grid;
@@ -908,6 +949,7 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            animation: fade-soft-up 0.6s ease-out both;
         }
         .form-group {
             margin-bottom: 25px;
