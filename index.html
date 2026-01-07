@@ -45,9 +45,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Design System tokens & base components -->
+    <link rel="stylesheet" href="assets/design-system.css">
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Swiper.js for hero slider -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -161,7 +167,7 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            gap: 20px;
+            gap: 24px;
         }
         .logo img {
             height: 55px;
@@ -174,31 +180,32 @@
         }
         .nav-menu { 
             display: flex; 
-            gap: 24px; 
-            align-items: center;
-            flex-wrap: wrap;
+            align-items: center; 
+            gap: 28px;
         }
         .nav-link { 
-            font-weight: 600; 
-            color: white; 
-            font-size: 0.98rem;
             position: relative;
-            padding: 8px 0;
-            letter-spacing: 0.02em;
+            font-weight: 500;
+            font-size: 0.98rem;
+            color: white;
+            opacity: 0.9;
+            padding-block: 4px;
         }
         .nav-link::after {
-            content: '';
+            content: "";
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: -4px;
+            inset-inline: 0;
+            margin-inline: auto;
             width: 0;
             height: 2px;
             background: var(--primary);
             transition: var(--transition);
         }
-        .nav-link:hover::after {
-            width: 100%;
+        .nav-link:hover::after { 
+            width: 80%;
         }
+        .nav-link:hover { opacity: 1; }
         .scrolled .nav-link { color: var(--dark); }
         .nav-link:hover { color: var(--primary); }
 
@@ -212,12 +219,12 @@
         /* سويتش اللغة في الهيدر */
         .language-switch {
             display: flex;
+            gap: 4px;
             align-items: center;
-            gap: 6px;
-            padding: 3px;
+            margin-inline-start: 14px;
+            padding: 2px;
             border-radius: 999px;
             background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.35);
         }
         .scrolled .language-switch {
             background: #f7f7f7;
@@ -225,19 +232,17 @@
         }
         .lang-toggle {
             border-radius: 999px;
-            border: none;
+            padding: 5px 12px;
             font-size: 0.78rem;
-            padding: 6px 14px;
-            min-width: 54px;
+            border: none;
             background: transparent;
-            color: white;
-        }
-        .scrolled .lang-toggle {
-            color: var(--dark);
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: var(--transition);
         }
         .lang-toggle.btn-primary {
-            background: white;
-            color: var(--dark);
+            background: var(--primary);
+            color: #111;
         }
         .scrolled .lang-toggle.btn-primary {
             background: var(--primary);
@@ -477,11 +482,11 @@
             fill: white;
         }
 
-        /* قسم الهيرو */
+        /* الهيرو القديم (سيُخفى بصريًا لاحقًا) */
         .hero-section {
             min-height: 100vh;
             background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%);
-            display: flex;
+            display: none; /* مخفي بعد إضافة الهيرو الجديد */
             align-items: center;
             text-align: center;
             color: #333;
@@ -565,6 +570,156 @@
             border: 1px solid #f1e4ec;
         }
 
+        /* الهيرو الجديد المستوحى من Valore - سلايدر كامل الشاشة */
+        .hero-new {
+            position: relative;
+            min-height: 100vh;
+            color: #ffffff;
+            direction: rtl;
+        }
+        .hero-new .swiper {
+            width: 100%;
+            height: 100vh;
+        }
+        .hero-new-slide {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .hero-new-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-new-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.75) 100%);
+        }
+        .hero-new-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            padding-inline: 8vw;
+            padding-block: 120px 80px;
+            text-align: right;
+            pointer-events: none;
+        }
+        .hero-new-content-inner {
+            max-width: 560px;
+            pointer-events: auto;
+        }
+        .hero-new-kicker {
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 12px;
+        }
+        .hero-new-title {
+            font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+        .hero-new-subtitle {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 26px;
+            color: rgba(255,255,255,0.9);
+        }
+        .hero-new-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .hero-new-actions .btn,
+        .hero-new-actions .btn-primary,
+        .hero-new-actions .btn-outline {
+            font-size: 0.95rem;
+        }
+        .hero-new-social {
+            position: absolute;
+            inset-inline-start: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+        .hero-new-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            opacity: 0.85;
+            transition: var(--transition);
+        }
+        .hero-new-social a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        .hero-new-pagination {
+            position: absolute;
+            bottom: 32px;
+            inset-inline: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+        .hero-new .swiper-pagination-bullet {
+            background: rgba(255,255,255,0.7);
+            width: 8px;
+            height: 8px;
+            opacity: 1;
+        }
+        .hero-new .swiper-pagination-bullet-active {
+            background: var(--primary);
+            width: 18px;
+            border-radius: 999px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-new-content {
+                padding-inline: 20px;
+                padding-block: 110px 60px;
+                align-items: flex-start;
+                text-align: right;
+            }
+            .hero-new-title {
+                font-size: 2rem;
+            }
+            .hero-new-subtitle {
+                font-size: 0.98rem;
+            }
+            .hero-new-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-new-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-new-social {
+                inset-inline-start: 14px;
+                top: auto;
+                bottom: 40px;
+                transform: none;
+                flex-direction: row;
+            }
+        }
+
         /* موبايل: تكديس الإحصائيات مع تقليل المسافات، مع بقاء النمط نفسه */
         @media (max-width: 768px) {
             .hero-stats {
@@ -614,7 +769,7 @@
         }
         .about-grid { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: 1.6fr 1fr; 
             gap: 60px; 
             align-items: center; 
         }
@@ -661,6 +816,9 @@
             line-height: 1.9;
             color: #555;
         }
+        .about-actions {
+            margin-top: 10px;
+        }
         .about-features {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -701,6 +859,42 @@
             margin-bottom: 5px;
         }
 
+        /* قسم الإحصائيات الهادئ */
+        .counter-section {
+            padding: 70px 0;
+            background: #111111;
+            color: #ffffff;
+        }
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .counter-item {
+            padding: 20px 15px;
+        }
+        .counter-label {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            margin-top: 6px;
+        }
+        .counter-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        @media (max-width: 992px) {
+            .counter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 600px) {
+            .counter-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
         /* قسم الخدمات */
         .services-section {
             padding: 90px 0;
@@ -709,21 +903,38 @@
         }
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 30px;
         }
         .service-card {
             background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
+            padding: 28px 26px 32px;
+            border-radius: 14px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: var(--transition);
             animation: fade-soft-up 0.55s ease-out both;
+            overflow: hidden;
+        }
+        .service-card-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .service-card:hover .service-card-image img {
+            transform: scale(1.05);
         }
         .service-icon {
             font-size: 3rem;
@@ -737,6 +948,17 @@
         .service-card p {
             color: #666;
             line-height: 1.7;
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
         }
 
         /* قسم المشاريع */
@@ -890,6 +1112,63 @@
             padding-bottom: 24px;
         }
 
+        /* قسم المهارات */
+        .skills-section {
+            padding: 90px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #fff7fb 40%, #ffffff 100%);
+            margin-top: 40px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.3fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .skills-image-wrapper img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+            object-fit: cover;
+        }
+        .skills-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .skill-item {
+            margin-bottom: 18px;
+        }
+        .skill-label-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 7px;
+            border-radius: 999px;
+            background: #ece4f2;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            width: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary), #ab8a4a);
+            transition: width 1.2s ease-out;
+        }
+        .skills-section.skills-animate .skill-bar-fill[data-skill="85"] { width: 85%; }
+        .skills-section.skills-animate .skill-bar-fill[data-skill="90"] { width: 90%; }
+        .skills-section.skills-animate .skill-bar-fill[data-skill="80"] { width: 80%; }
+
+        @media (max-width: 992px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* قسم الاتصال */
         .contact-section {
             padding: 90px 0;
@@ -979,6 +1258,29 @@
             resize: vertical;
             min-height: 120px;
         }
+
+        /* قسم الـ CTA الداكن */
+        .cta-section {
+            background: #111111;
+            color: #ffffff;
+            padding: 70px 0;
+            text-align: center;
+        }
+        .cta-inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .cta-title {
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .cta-text {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 26px;
+        }
+
         .submit-btn {
             width: 100%;
         }
@@ -987,13 +1289,13 @@
         .main-footer { 
             background: var(--dark); 
             color: white; 
-            padding: 80px 0 30px; 
+            padding: 70px 0 28px; 
         }
         .footer-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 50px; 
-            margin-bottom: 50px; 
+            gap: 40px; 
+            margin-bottom: 40px; 
         }
         .footer-logo { 
             height: 55px; 
@@ -1003,17 +1305,18 @@
             margin-bottom: 20px; 
         }
         .footer-col h4 { 
-            font-size: 1.2rem; 
-            margin-bottom: 25px; 
+            font-size: 1.1rem; 
+            margin-bottom: 18px; 
             color: var(--primary); 
+            font-weight: 700;
         }
         .footer-col p {
             opacity: 0.8;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .footer-col ul li { 
-            margin-bottom: 12px; 
+            margin-bottom: 10px; 
             opacity: 0.8;
             transition: var(--transition);
         }
@@ -1028,9 +1331,9 @@
             margin-top: 20px;
         }
         .footer-social a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.08);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1039,7 +1342,7 @@
         }
         .footer-social a:hover {
             background: var(--primary);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         .footer-social svg {
             width: 18px;
@@ -1225,6 +1528,18 @@
                 width: 100%;
                 text-align: center;
             }
+            .section-header h2 {
+                font-size: 1.7rem;
+            }
+            .counter-section {
+                padding: 60px 0;
+            }
+            .cta-section {
+                padding: 60px 0;
+            }
+            .skills-section {
+                padding: 70px 0;
+            }
         }
     </style>
 </head>
@@ -1235,85 +1550,85 @@
     activeFilter: 'all',
     mobileNavOpen: false,
     projects: [
-        {id: 1, category: 'residential', title: 'فيلا عصرية | Contemporary Villa', location: 'جدة، حي الشاطئ | Jeddah, Al Shati District', image: 'images/project-38.jpeg'},
-        {id: 2, category: 'residential', title: 'شقة فاخرة | Luxury Apartment', location: 'القاهرة، التجمع | Cairo, El Tagamoa', image: 'images/project-40.jpeg'},
-        {id: 3, category: 'commercial', title: 'مقر شركة | Corporate Office', location: 'جدة، برج الظهران | Jeddah, Dhahran Tower', image: 'images/project-3.webp'},
-        {id: 4, category: 'hospitality', title: 'مطعم فاخر | Fine Dining Restaurant', location: 'القاهرة، المعادي | Cairo, Maadi', image: 'images/project-41.jpeg'},
-        {id: 5, category: 'furniture', title: 'أثاث مخصص | Bespoke Furniture', location: 'جدة | Jeddah', image: 'images/furniture-09.jpeg'},
-        {id: 6, category: 'residential', title: 'قصر ملكي | Royal Palace', location: 'الرياض | Riyadh', image: 'images/project-42.jpeg'},
+        {id: 1, category: 'residential', title: 'فيلا عصرية | Contemporary Villa', location: 'جدة، حي الشاطئ | Jeddah, Al Shati District', image: 'assets/images/Residential/kidsroom (2).jpeg'},
+        {id: 2, category: 'residential', title: 'شقة فاخرة | Luxury Apartment', location: 'القاهرة، التجمع | Cairo, El Tagamoa', image: 'assets/images/Residential/kidsroom (3).jpeg'},
+        {id: 3, category: 'commercial', title: 'مقر شركة | Corporate Office', location: 'جدة، برج الظهران | Jeddah, Dhahran Tower', image: 'assets/images/Commercial/administrative recruitment agency in damam,KSA.jpeg'},
+        {id: 4, category: 'hospitality', title: 'مطعم فاخر | Fine Dining Restaurant', location: 'القاهرة، المعادي | Cairo, Maadi', image: 'assets/images/Hospitality/furniture-09.jpeg'},
+        {id: 5, category: 'furniture', title: 'أثاث مخصص | Bespoke Furniture', location: 'جدة | Jeddah', image: 'assets/images/Furniture/furniture-03.jpeg'},
+        {id: 6, category: 'residential', title: 'قصر ملكي | Royal Palace', location: 'الرياض | Riyadh', image: 'assets/images/Residential/kidsroom (4).jpeg'},
 
-        {id: 7, category: 'commercial', title: 'مشروع تجاري 01 | Commercial 01', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-01.jpeg'},
-        {id: 8, category: 'commercial', title: 'مشروع تجاري 02 | Commercial 02', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-02.jpeg'},
-        {id: 9, category: 'commercial', title: 'مشروع تجاري 03 | Commercial 03', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-03.jpeg'},
-        {id: 10, category: 'commercial', title: 'مشروع تجاري 04 | Commercial 04', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-04.jpeg'},
-        {id: 11, category: 'commercial', title: 'مشروع تجاري 05 | Commercial 05', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-05.jpeg'},
-        {id: 12, category: 'commercial', title: 'مشروع تجاري 06 | Commercial 06', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-07.jpeg'},
-        {id: 13, category: 'commercial', title: 'مشروع تجاري 07 | Commercial 07', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-13.jpeg'},
-        {id: 14, category: 'commercial', title: 'مشروع تجاري 08 | Commercial 08', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-14.jpeg'},
-        {id: 15, category: 'commercial', title: 'مشروع تجاري 09 | Commercial 09', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-16.jpeg'},
-        {id: 16, category: 'commercial', title: 'مشروع تجاري 10 | Commercial 10', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-17.jpeg'},
-        {id: 17, category: 'commercial', title: 'مشروع تجاري 11 | Commercial 11', location: 'مشروع تجاري | Commercial Project', image: 'images/project-66.jpeg'},
-        {id: 18, category: 'commercial', title: 'مشروع تجاري 12 | Commercial 12', location: 'مشروع تجاري | Commercial Project', image: 'images/project-67.jpeg'},
-        {id: 19, category: 'commercial', title: 'مشروع تجاري 13 | Commercial 13', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-20.jpeg'},
-        {id: 20, category: 'commercial', title: 'مشروع تجاري 14 | Commercial 14', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-21.jpeg'},
-        {id: 21, category: 'commercial', title: 'مشروع تجاري 15 | Commercial 15', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-22.jpeg'},
-        {id: 22, category: 'commercial', title: 'مشروع تجاري 16 | Commercial 16', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-25.jpeg'},
-        {id: 23, category: 'commercial', title: 'مشروع تجاري 17 | Commercial 17', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-29.jpeg'},
-        {id: 24, category: 'commercial', title: 'مشروع تجاري 18 | Commercial 18', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-30.jpeg'},
-        {id: 25, category: 'commercial', title: 'مشروع تجاري 19 | Commercial 19', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-31.jpeg'},
-        {id: 26, category: 'commercial', title: 'مشروع تجاري 20 | Commercial 20', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-32.jpeg'},
+        {id: 7, category: 'commercial', title: 'مشروع تجاري 01 | Commercial 01', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA.jpeg'},
+        {id: 8, category: 'commercial', title: 'مشروع تجاري 02 | Commercial 02', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA01.jpeg'},
+        {id: 9, category: 'commercial', title: 'مشروع تجاري 03 | Commercial 03', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA02.jpeg'},
+        {id: 10, category: 'commercial', title: 'مشروع تجاري 04 | Commercial 04', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA03.jpeg'},
+        {id: 11, category: 'commercial', title: 'مشروع تجاري 05 | Commercial 05', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA04.jpeg'},
+        {id: 12, category: 'commercial', title: 'مشروع تجاري 06 | Commercial 06', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA05.jpeg'},
+        {id: 13, category: 'commercial', title: 'مشروع تجاري 07 | Commercial 07', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA06.jpeg'},
+        {id: 14, category: 'commercial', title: 'مشروع تجاري 08 | Commercial 08', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA07.jpeg'},
+        {id: 15, category: 'commercial', title: 'مشروع تجاري 09 | Commercial 09', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA08.jpeg'},
+        {id: 16, category: 'commercial', title: 'مشروع تجاري 10 | Commercial 10', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA09.jpeg'},
+        {id: 17, category: 'commercial', title: 'مشروع تجاري 11 | Commercial 11', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA1.jpeg'},
+        {id: 18, category: 'commercial', title: 'مشروع تجاري 12 | Commercial 12', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA10.jpeg'},
+        {id: 19, category: 'commercial', title: 'مشروع تجاري 13 | Commercial 13', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA11.jpeg'},
+        {id: 20, category: 'commercial', title: 'مشروع تجاري 14 | Commercial 14', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA2.jpeg'},
+        {id: 21, category: 'commercial', title: 'مشروع تجاري 15 | Commercial 15', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA3.jpeg'},
+        {id: 22, category: 'commercial', title: 'مشروع تجاري 16 | Commercial 16', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA4.jpeg'},
+        {id: 23, category: 'commercial', title: 'مشروع تجاري 17 | Commercial 17', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA5.jpeg'},
+        {id: 24, category: 'commercial', title: 'مشروع تجاري 18 | Commercial 18', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA6.jpeg'},
+        {id: 25, category: 'commercial', title: 'مشروع تجاري 19 | Commercial 19', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA7.jpeg'},
+        {id: 26, category: 'commercial', title: 'مشروع تجاري 20 | Commercial 20', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA8.jpeg'},
 
-        {id: 27, category: 'residential', title: 'مشروع سكني 01 | Residential 01', location: 'مشروع سكني | Residential Project', image: 'images/residential-02.jpeg'},
-        {id: 28, category: 'residential', title: 'مشروع سكني 02 | Residential 02', location: 'مشروع سكني | Residential Project', image: 'images/residential-04.jpeg'},
-        {id: 29, category: 'residential', title: 'مشروع سكني 03 | Residential 03', location: 'مشروع سكني | Residential Project', image: 'images/residential-05.jpeg'},
-        {id: 30, category: 'residential', title: 'مشروع سكني 04 | Residential 04', location: 'مشروع سكني | Residential Project', image: 'images/residential-07.jpeg'},
-        {id: 31, category: 'residential', title: 'مشروع سكني 05 | Residential 05', location: 'مشروع سكني | Residential Project', image: 'images/residential-09.jpeg'},
-        {id: 32, category: 'residential', title: 'مشروع سكني 06 | Residential 06', location: 'مشروع سكني | Residential Project', image: 'images/residential-10.jpeg'},
-        {id: 33, category: 'residential', title: 'مشروع سكني 07 | Residential 07', location: 'مشروع سكني | Residential Project', image: 'images/residential-12.jpeg'},
-        {id: 34, category: 'residential', title: 'مشروع سكني 08 | Residential 08', location: 'مشروع سكني | Residential Project', image: 'images/residential-13.jpeg'},
-        {id: 35, category: 'residential', title: 'مشروع سكني 09 | Residential 09', location: 'مشروع سكني | Residential Project', image: 'images/residential-14.jpeg'},
-        {id: 36, category: 'residential', title: 'مشروع سكني 10 | Residential 10', location: 'مشروع سكني | Residential Project', image: 'images/residential-16.jpeg'},
-        {id: 37, category: 'residential', title: 'مشروع سكني 11 | Residential 11', location: 'مشروع سكني | Residential Project', image: 'images/residential-18.jpeg'},
-        {id: 38, category: 'residential', title: 'مشروع سكني 12 | Residential 12', location: 'مشروع سكني | Residential Project', image: 'images/residential-20.jpeg'},
-        {id: 39, category: 'residential', title: 'مشروع سكني 13 | Residential 13', location: 'مشروع سكني | Residential Project', image: 'images/residential-21.jpeg'},
-        {id: 40, category: 'residential', title: 'مشروع سكني 14 | Residential 14', location: 'مشروع سكني | Residential Project', image: 'images/residential-22.jpeg'},
-        {id: 41, category: 'residential', title: 'مشروع سكني 15 | Residential 15', location: 'مشروع سكني | Residential Project', image: 'images/residential-23.jpeg'},
-        {id: 42, category: 'residential', title: 'مشروع سكني 16 | Residential 16', location: 'مشروع سكني | Residential Project', image: 'images/project-166.jpeg'},
-        {id: 43, category: 'residential', title: 'مشروع سكني 17 | Residential 17', location: 'مشروع سكني | Residential Project', image: 'images/project-167.jpeg'},
-        {id: 44, category: 'residential', title: 'مشروع سكني 18 | Residential 18', location: 'مشروع سكني | Residential Project', image: 'images/project-168.jpeg'},
+        {id: 27, category: 'residential', title: 'مشروع سكني 01 | Residential 01', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (5).jpeg'},
+        {id: 28, category: 'residential', title: 'مشروع سكني 02 | Residential 02', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (6).jpeg'},
+        {id: 29, category: 'residential', title: 'مشروع سكني 03 | Residential 03', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (7).jpeg'},
+        {id: 30, category: 'residential', title: 'مشروع سكني 04 | Residential 04', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (8).jpeg'},
+        {id: 31, category: 'residential', title: 'مشروع سكني 05 | Residential 05', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom.jpeg'},
+        {id: 32, category: 'residential', title: 'مشروع سكني 06 | Residential 06', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (10).jpeg'},
+        {id: 33, category: 'residential', title: 'مشروع سكني 07 | Residential 07', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (2).jpeg'},
+        {id: 34, category: 'residential', title: 'مشروع سكني 08 | Residential 08', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (3).jpeg'},
+        {id: 35, category: 'residential', title: 'مشروع سكني 09 | Residential 09', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (4).jpeg'},
+        {id: 36, category: 'residential', title: 'مشروع سكني 10 | Residential 10', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (5).jpeg'},
+        {id: 37, category: 'residential', title: 'مشروع سكني 11 | Residential 11', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (6).jpeg'},
+        {id: 38, category: 'residential', title: 'مشروع سكني 12 | Residential 12', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (7).jpeg'},
+        {id: 39, category: 'residential', title: 'مشروع سكني 13 | Residential 13', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (8).jpeg'},
+        {id: 40, category: 'residential', title: 'مشروع سكني 14 | Residential 14', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (9).jpeg'},
+        {id: 41, category: 'residential', title: 'مشروع سكني 15 | Residential 15', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom.jpeg'},
+        {id: 42, category: 'residential', title: 'مشروع سكني 16 | Residential 16', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/villa in el ehsaa KSA .jpeg'},
+        {id: 43, category: 'residential', title: 'مشروع سكني 17 | Residential 17', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/villa in el ehsaa KSA 01.jpeg'},
+        {id: 44, category: 'residential', title: 'مشروع سكني 18 | Residential 18', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/villa in el ehsaa KSA 02.jpeg'},
 
-        {id: 45, category: 'hospitality', title: 'مشروع ضيافة 01 | Hospitality 01', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-01.jpeg'},
-        {id: 46, category: 'hospitality', title: 'مشروع ضيافة 02 | Hospitality 02', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-02.jpeg'},
-        {id: 47, category: 'hospitality', title: 'مشروع ضيافة 03 | Hospitality 03', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-03.jpeg'},
-        {id: 48, category: 'hospitality', title: 'مشروع ضيافة 04 | Hospitality 04', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-04.jpeg'},
-        {id: 49, category: 'hospitality', title: 'مشروع ضيافة 05 | Hospitality 05', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-05.jpeg'},
-        {id: 50, category: 'hospitality', title: 'مشروع ضيافة 06 | Hospitality 06', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-06.jpeg'},
-        {id: 51, category: 'hospitality', title: 'مشروع ضيافة 07 | Hospitality 07', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-07.jpeg'},
-        {id: 52, category: 'hospitality', title: 'مشروع ضيافة 08 | Hospitality 08', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-08.jpeg'},
-        {id: 53, category: 'hospitality', title: 'مشروع ضيافة 09 | Hospitality 09', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-09.jpeg'},
-        {id: 54, category: 'hospitality', title: 'مشروع ضيافة 10 | Hospitality 10', location: 'مشروع ضيافة | Hospitality Project', image: 'images/hospitality-10.jpeg'},
+        {id: 45, category: 'hospitality', title: 'مشروع ضيافة 01 | Hospitality 01', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/furniture-11.jpeg'},
+        {id: 46, category: 'hospitality', title: 'مشروع ضيافة 02 | Hospitality 02', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/furniture-14.jpeg'},
+        {id: 47, category: 'hospitality', title: 'مشروع ضيافة 03 | Hospitality 03', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/furniture-15.jpeg'},
+        {id: 48, category: 'hospitality', title: 'مشروع ضيافة 04 | Hospitality 04', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-68.jpeg'},
+        {id: 49, category: 'hospitality', title: 'مشروع ضيافة 05 | Hospitality 05', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-85.jpeg'},
+        {id: 50, category: 'hospitality', title: 'مشروع ضيافة 06 | Hospitality 06', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-87.jpeg'},
+        {id: 51, category: 'hospitality', title: 'مشروع ضيافة 07 | Hospitality 07', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-89.jpeg'},
+        {id: 52, category: 'hospitality', title: 'مشروع ضيافة 08 | Hospitality 08', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-90.jpeg'},
+        {id: 53, category: 'hospitality', title: 'مشروع ضيافة 09 | Hospitality 09', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/project-93.jpeg'},
+        {id: 54, category: 'hospitality', title: 'مشروع ضيافة 10 | Hospitality 10', location: 'مشروع ضيافة | Hospitality Project', image: 'assets/images/Hospitality/residential-05.jpeg'},
 
-        {id: 55, category: 'furniture', title: 'مشروع أثاث 01 | Furniture 01', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-02.jpeg'},
-        {id: 56, category: 'furniture', title: 'مشروع أثاث 02 | Furniture 02', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-04.jpeg'},
-        {id: 57, category: 'furniture', title: 'مشروع أثاث 03 | Furniture 03', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-06.jpeg'},
-        {id: 58, category: 'furniture', title: 'مشروع أثاث 04 | Furniture 04', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-09.jpeg'},
-        {id: 59, category: 'furniture', title: 'مشروع أثاث 05 | Furniture 05', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-10.jpeg'},
-        {id: 60, category: 'furniture', title: 'مشروع أثاث 06 | Furniture 06', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-11.jpeg'},
-        {id: 61, category: 'furniture', title: 'مشروع أثاث 07 | Furniture 07', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-12.jpeg'},
-        {id: 62, category: 'furniture', title: 'مشروع أثاث 08 | Furniture 08', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-14.jpeg'},
-        {id: 63, category: 'furniture', title: 'مشروع أثاث 09 | Furniture 09', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-15.jpeg'},
-        {id: 64, category: 'furniture', title: 'مشروع أثاث 10 | Furniture 10', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-17.jpeg'},
+        {id: 55, category: 'furniture', title: 'مشروع أثاث 01 | Furniture 01', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-10.jpeg'},
+        {id: 56, category: 'furniture', title: 'مشروع أثاث 02 | Furniture 02', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-12.jpeg'},
+        {id: 57, category: 'furniture', title: 'مشروع أثاث 03 | Furniture 03', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-16.jpeg'},
+        {id: 58, category: 'furniture', title: 'مشروع أثاث 04 | Furniture 04', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-17.jpeg'},
+        {id: 59, category: 'furniture', title: 'مشروع أثاث 05 | Furniture 05', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-21.jpeg'},
+        {id: 60, category: 'furniture', title: 'مشروع أثاث 06 | Furniture 06', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/furniture-22.jpeg'},
+        {id: 61, category: 'furniture', title: 'مشروع أثاث 07 | Furniture 07', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/project-171.jpeg'},
+        {id: 62, category: 'furniture', title: 'مشروع أثاث 08 | Furniture 08', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/project-173.jpeg'},
+        {id: 63, category: 'furniture', title: 'مشروع أثاث 09 | Furniture 09', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/project-174.jpeg'},
+        {id: 64, category: 'furniture', title: 'مشروع أثاث 10 | Furniture 10', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/project-175.jpeg'},
 
-        {id: 65, category: 'commercial', title: 'مشروع تجاري 21 | Commercial 21', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-23.jpeg'},
-        {id: 66, category: 'commercial', title: 'مشروع تجاري 22 | Commercial 22', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-24.jpeg'},
-        {id: 67, category: 'commercial', title: 'مشروع تجاري 23 | Commercial 23', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-26.jpeg'},
-        {id: 68, category: 'commercial', title: 'مشروع تجاري 24 | Commercial 24', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-27.jpeg'},
-        {id: 69, category: 'commercial', title: 'مشروع تجاري 25 | Commercial 25', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-28.jpeg'},
-        {id: 70, category: 'commercial', title: 'مشروع تجاري 26 | Commercial 26', location: 'مشروع تجاري | Commercial Project', image: 'images/commercial-34.jpeg'},
+        {id: 65, category: 'commercial', title: 'مشروع تجاري 21 | Commercial 21', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial shop in KSA9.jpeg'},
+        {id: 66, category: 'commercial', title: 'مشروع تجاري 22 | Commercial 22', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-04.jpeg'},
+        {id: 67, category: 'commercial', title: 'مشروع تجاري 23 | Commercial 23', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-05.jpeg'},
+        {id: 68, category: 'commercial', title: 'مشروع تجاري 24 | Commercial 24', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-08.jpeg'},
+        {id: 69, category: 'commercial', title: 'مشروع تجاري 25 | Commercial 25', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-14.jpeg'},
+        {id: 70, category: 'commercial', title: 'مشروع تجاري 26 | Commercial 26', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-16.jpeg'},
 
-        {id: 71, category: 'residential', title: 'مشروع سكني 19 | Residential 19', location: 'مشروع سكني | Residential Project', image: 'images/residential-15.jpeg'},
-        {id: 72, category: 'residential', title: 'مشروع سكني 20 | Residential 20', location: 'مشروع سكني | Residential Project', image: 'images/residential-17.jpeg'},
-        {id: 73, category: 'residential', title: 'مشروع سكني 21 | Residential 21', location: 'مشروع سكني | Residential Project', image: 'images/residential-19.jpeg'},
+        {id: 71, category: 'residential', title: 'مشروع سكني 19 | Residential 19', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (2).jpeg'},
+        {id: 72, category: 'residential', title: 'مشروع سكني 20 | Residential 20', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (3).jpeg'},
+        {id: 73, category: 'residential', title: 'مشروع سكني 21 | Residential 21', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (4).jpeg'},
 
         {id: 74, category: 'furniture', title: 'مشروع أثاث 11 | Furniture 11', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-18.jpeg'},
         {id: 75, category: 'furniture', title: 'مشروع أثاث 12 | Furniture 12', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-21.jpeg'},
@@ -1324,27 +1639,27 @@
         {id: 80, category: 'furniture', title: 'مشروع أثاث 17 | Furniture 17', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-27.jpeg'},
         {id: 81, category: 'furniture', title: 'مشروع أثاث 18 | Furniture 18', location: 'أثاث مخصص | Custom Furniture', image: 'images/furniture-28.jpeg'},
 
-        {id: 82, category: 'residential', title: 'مشروع سكني 22 | Residential 22', location: 'مشروع سكني | Residential Project', image: 'images/project-33.jpeg'},
-        {id: 83, category: 'residential', title: 'مشروع سكني 23 | Residential 23', location: 'مشروع سكني | Residential Project', image: 'images/project-34.jpeg'},
-        {id: 84, category: 'residential', title: 'مشروع سكني 24 | Residential 24', location: 'مشروع سكني | Residential Project', image: 'images/project-35.jpeg'},
-        {id: 85, category: 'residential', title: 'مشروع سكني 25 | Residential 25', location: 'مشروع سكني | Residential Project', image: 'images/project-36.jpeg'},
-        {id: 86, category: 'residential', title: 'مشروع سكني 26 | Residential 26', location: 'مشروع سكني | Residential Project', image: 'images/project-37.jpeg'},
-        {id: 87, category: 'residential', title: 'مشروع سكني 27 | Residential 27', location: 'مشروع سكني | Residential Project', image: 'images/project-39.jpeg'},
-        {id: 88, category: 'residential', title: 'مشروع سكني 28 | Residential 28', location: 'مشروع سكني | Residential Project', image: 'images/project-44.jpeg'},
-        {id: 89, category: 'residential', title: 'مشروع سكني 29 | Residential 29', location: 'مشروع سكني | Residential Project', image: 'images/project-45.jpeg'},
+        {id: 82, category: 'residential', title: 'مشروع سكني 22 | Residential 22', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (7).jpeg'},
+        {id: 83, category: 'residential', title: 'مشروع سكني 23 | Residential 23', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (5).jpeg'},
+        {id: 84, category: 'residential', title: 'مشروع سكني 24 | Residential 24', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (6).jpeg'},
+        {id: 85, category: 'residential', title: 'مشروع سكني 25 | Residential 25', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (7).jpeg'},
+        {id: 86, category: 'residential', title: 'مشروع سكني 26 | Residential 26', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom (8).jpeg'},
+        {id: 87, category: 'residential', title: 'مشروع سكني 27 | Residential 27', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/kidsroom.jpeg'},
+        {id: 88, category: 'residential', title: 'مشروع سكني 28 | Residential 28', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (10).jpeg'},
+        {id: 89, category: 'residential', title: 'مشروع سكني 29 | Residential 29', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (2).jpeg'},
 
-        {id: 90, category: 'commercial', title: 'مشروع تجاري 27 | Commercial 27', location: 'مشروع تجاري | Commercial Project', image: 'images/project-47.jpeg'},
-        {id: 91, category: 'commercial', title: 'مشروع تجاري 28 | Commercial 28', location: 'مشروع تجاري | Commercial Project', image: 'images/project-49.jpeg'},
-        {id: 92, category: 'commercial', title: 'مشروع تجاري 29 | Commercial 29', location: 'مشروع تجاري | Commercial Project', image: 'images/project-50.jpeg'},
+        {id: 90, category: 'commercial', title: 'مشروع تجاري 27 | Commercial 27', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-17.jpeg'},
+        {id: 91, category: 'commercial', title: 'مشروع تجاري 28 | Commercial 28', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-18.jpeg'},
+        {id: 92, category: 'commercial', title: 'مشروع تجاري 29 | Commercial 29', location: 'مشروع تجاري | Commercial Project', image: 'assets/images/Commercial/commercial-21.jpeg'},
 
-        {id: 93, category: 'residential', title: 'مشروع سكني 30 | Residential 30', location: 'مشروع سكني | Residential Project', image: 'images/project-58.jpeg'},
-        {id: 94, category: 'residential', title: 'مشروع سكني 31 | Residential 31', location: 'مشروع سكني | Residential Project', image: 'images/project-60.jpeg'},
-        {id: 95, category: 'residential', title: 'مشروع سكني 32 | Residential 32', location: 'مشروع سكني | Residential Project', image: 'images/project-61.jpeg'},
-        {id: 96, category: 'residential', title: 'مشروع سكني 33 | Residential 33', location: 'مشروع سكني | Residential Project', image: 'images/project-65.jpeg'},
+        {id: 93, category: 'residential', title: 'مشروع سكني 30 | Residential 30', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (3).jpeg'},
+        {id: 94, category: 'residential', title: 'مشروع سكني 31 | Residential 31', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (4).jpeg'},
+        {id: 95, category: 'residential', title: 'مشروع سكني 32 | Residential 32', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (5).jpeg'},
+        {id: 96, category: 'residential', title: 'مشروع سكني 33 | Residential 33', location: 'مشروع سكني | Residential Project', image: 'assets/images/Residential/master bedroom (6).jpeg'},
 
-        {id: 97, category: 'furniture', title: 'وحدة أثاث حديثة | Modern Furniture Unit', location: 'أثاث مخصص | Custom Furniture', image: 'images/WhatsApp Image 2026-01-06 at 4.10.42 PM.jpeg'},
-        {id: 98, category: 'furniture', title: 'وحدة تخزين عملية | Functional Storage Unit', location: 'أثاث مخصص | Custom Furniture', image: 'images/WhatsApp Image 2026-01-06 at 4.10.45 PM.jpeg'},
-        {id: 99, category: 'furniture', title: 'ركن جلوس مميز | Signature Seating Corner', location: 'أثاث مخصص | Custom Furniture', image: 'images/WhatsApp Image 2026-01-06 at 4.10.47 PM.jpeg'},
+        {id: 97, category: 'furniture', title: 'وحدة أثاث حديثة | Modern Furniture Unit', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/residential-20.jpeg'},
+        {id: 98, category: 'furniture', title: 'وحدة تخزين عملية | Functional Storage Unit', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/residential-21.jpeg'},
+        {id: 99, category: 'furniture', title: 'ركن جلوس مميز | Signature Seating Corner', location: 'أثاث مخصص | Custom Furniture', image: 'assets/images/Furniture/residential-22.jpeg'},
     ],
     setTab(tab) {
         this.activeTab = tab;
@@ -1489,8 +1804,86 @@
         </div>
     </div>
 
-    <!-- قسم الهيرو -->
-    <section id="home" class="hero-section" x-show="activeTab === 'home'">
+    <!-- الهيرو الجديد - سلايدر كامل الشاشة -->
+    <section id="home" class="hero-new" x-show="activeTab === 'home'">
+        <div class="swiper hero-new-swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide hero-new-slide">
+                    <img src="images/project-38.jpeg" alt="تصميم داخلي فاخر" loading="lazy">
+                    <div class="hero-new-overlay"></div>
+                    <div class="hero-new-content">
+                        <div class="hero-new-content-inner">
+                            <div class="hero-new-kicker" x-text="language === 'ar' ? 'ARTROVA STUDIO' : 'ARTROVA STUDIO'"></div>
+                            <h1 class="hero-new-title" x-text="language === 'ar' 
+                                ? 'مستوى جديد من التصميم الداخلي الهادئ والواضح'
+                                : 'A new level of calm, clear interior design'"></h1>
+                            <p class="hero-new-subtitle" x-text="language === 'ar' 
+                                ? 'Artrova Studio استوديو تصميم داخلي ومعماري يهتم بالتفاصيل الصغيرة قبل الكبيرة، ليصنع مساحات أنيقة وسهلة الاستخدام.'
+                                : 'Artrova Studio is an interior and architectural design studio that carefully crafts elegant, easy-to-use spaces.'"></p>
+                            <div class="hero-new-actions">
+                                <a href="#" @click.prevent="setTab('portfolio')" class="btn btn-primary" x-text="language === 'ar' ? 'شاهد أعمالنا' : 'View Our Work'"></a>
+                                <a href="https://wa.me/966506534579" target="_blank" class="btn btn-outline" x-text="language === 'ar' ? 'احصل على استشارة' : 'Get a Consultation'"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide hero-new-slide">
+                    <img src="images/project-40.jpeg" alt="مساحة معيشة سكنية" loading="lazy">
+                    <div class="hero-new-overlay"></div>
+                    <div class="hero-new-content">
+                        <div class="hero-new-content-inner">
+                            <div class="hero-new-kicker" x-text="language === 'ar' ? 'تصميم سكني' : 'Residential Design'"></div>
+                            <h1 class="hero-new-title" x-text="language === 'ar' 
+                                ? 'مساحات سكنية تعكس أسلوب حياتك بدقة'
+                                : 'Residential spaces that precisely reflect your lifestyle'"></h1>
+                            <p class="hero-new-subtitle" x-text="language === 'ar' 
+                                ? 'من أول فكرة حتى تسليم مفتاح؛ نعمل على تنظيم المساحة، اختيار الخامات، وتنسيق الأثاث.'
+                                : 'From first idea to handover, we organise the space, select materials, and coordinate furniture layout.'"></p>
+                            <div class="hero-new-actions">
+                                <a href="#" @click.prevent="setTab('services')" class="btn btn-primary" x-text="language === 'ar' ? 'اكتشف خدماتنا' : 'Discover Our Services'"></a>
+                                <a href="#" @click.prevent="setTab('contact')" class="btn btn-outline" x-text="language === 'ar' ? 'تواصل معنا' : 'Contact Us'"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide hero-new-slide">
+                    <img src="images/project-41.jpeg" alt="مشروع ضيافة فاخر" loading="lazy">
+                    <div class="hero-new-overlay"></div>
+                    <div class="hero-new-content">
+                        <div class="hero-new-content-inner">
+                            <div class="hero-new-kicker" x-text="language === 'ar' ? 'مشاريع ضيافة وتجارية' : 'Hospitality & Commercial'"></div>
+                            <h1 class="hero-new-title" x-text="language === 'ar' 
+                                ? 'نصمم تجارب ضيافة ومساحات عمل مريحة وواضحة'
+                                : 'We design hospitality and workspaces that feel clear and welcoming'"></h1>
+                            <p class="hero-new-subtitle" x-text="language === 'ar' 
+                                ? 'مطاعم، مكاتب، وفنادق بتجارب مدروسة تتوازن فيها الهوية البصرية مع سهولة الاستخدام.'
+                                : 'Restaurants, offices, and hotels where visual identity and usability stay in balance.'"></p>
+                            <div class="hero-new-actions">
+                                <a href="#" @click.prevent="setTab('portfolio')" class="btn btn-primary" x-text="language === 'ar' ? 'تصفح المشاريع' : 'Browse Projects'"></a>
+                                <a href="https://wa.me/966506534579" target="_blank" class="btn btn-outline" x-text="language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project'"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-new-pagination swiper-pagination"></div>
+        </div>
+
+        <div class="hero-new-social">
+            <a href="https://www.instagram.com/nodedesignn" target="_blank" aria-label="Instagram">IG</a>
+            <a href="https://www.facebook.com/profile.php?id=61574086439178" target="_blank" aria-label="Facebook">FB</a>
+            <a href="https://wa.me/966506534579" target="_blank" aria-label="WhatsApp">WA</a>
+        </div>
+    </section>
+
+    <!-- قسم الهيرو القديم (مخفي بصريًا لكن محتفظ به في الكود) -->
+    <section id="home-legacy" class="hero-section" x-show="false">
         <div class="container hero-inner">
             <h1 class="hero-title" x-text="language === 'ar' 
                 ? 'نساعدك على تنظيم وتطوير مساحتك خطوة بخطوة'
@@ -1499,7 +1892,7 @@
                 ? 'Artrova Studio استوديو تصميم داخلي ومعماري يهتم بالتفاصيل الصغيرة قبل الكبيرة. نرافقك من أول فكرة حتى تسلّم مساحة جاهزة ومريحة وسهلة الاستخدام لك ولعائلتك.'
                 : 'Artrova Studio is an interior and architectural design studio that cares about the small details before the big picture. We stay with you from first idea to a ready-to-live space that feels comfortable, clear, and easy to use every day.'"></p>
             <div class="hero-buttons">
-                <a href="#portfolio" class="btn btn-primary" x-text="language === 'ar' ? 'شاهد أعمالنا' : 'View Our Work'"></a>
+                <a href="#" @click.prevent="setTab('portfolio')" class="btn btn-primary" x-text="language === 'ar' ? 'شاهد أعمالنا' : 'View Our Work'"></a>
                 <a href="https://wa.me/966506534579" class="btn btn-outline" x-text="language === 'ar' ? 'احصل على استشارة' : 'Get a Consultation'"></a>
             </div>
 
@@ -1567,6 +1960,30 @@
         </div>
     </section>
 
+    <!-- قسم الإحصائيات -->
+    <section class="counter-section" x-show="activeTab === 'about' || activeTab === 'home'">
+        <div class="container">
+            <div class="counter-grid" id="stats-counter">
+                <div class="counter-item">
+                    <div class="counter-number" data-target="10">0</div>
+                    <div class="counter-label" x-text="language === 'ar' ? 'سنوات خبرة' : 'Years of experience'"></div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="150">0</div>
+                    <div class="counter-label" x-text="language === 'ar' ? 'مشاريع منجزة' : 'Completed projects'"></div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="90">0</div>
+                    <div class="counter-label" x-text="language === 'ar' ? 'عملاء سعداء' : 'Happy clients'"></div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="4">0</div>
+                    <div class="counter-label" x-text="language === 'ar' ? 'جوائز وتكريمات' : 'Awards & recognitions'"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- قسم من نحن - محسّن -->
     <section id="about" class="about-section" x-show="activeTab === 'about'">
         <div class="container">
@@ -1589,6 +2006,9 @@
                     <p x-text="language === 'ar'
                         ? 'نرافقك في مراحل التخطيط، اختيار التشطيبات، وتنسيق الأثاث، بحيث تبقى النتيجة مريحة للعين ومناسبة لاستخدامك اليومي.'
                         : 'We support you through planning, finishes selection, and furniture layout so the final result looks calm and works well for your daily routine.'"></p>
+                    <div class="about-actions">
+                        <a href="#portfolio" class="btn btn-outline" x-text="language === 'ar' ? 'شاهد المشاريع' : 'View Projects'"></a>
+                    </div>
                     
                     <div class="about-features">
                         <div class="about-feature-item">
@@ -1662,24 +2082,47 @@
             
             <div class="services-grid">
                 <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="assets/images/Residential/master bedroom.jpeg" alt="خدمة تصميم داخلي سكني" loading="lazy">
+                    </div>
                     <div class="service-icon">🏠</div>
                     <h3 x-text="language === 'ar' ? 'تصميم سكني' : 'Residential Design'"></h3>
                     <p x-text="language === 'ar' ? 'تصميم فلل وشقق فاخرة تعكس ذوقك الرفيع' : 'Design of luxury villas and apartments that reflect your taste'"></p>
                 </div>
                 <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="assets/images/Commercial/commercial shop in KSA.jpeg" alt="خدمة تصميم تجاري" loading="lazy">
+                    </div>
                     <div class="service-icon">🏢</div>
                     <h3 x-text="language === 'ar' ? 'تصميم تجاري' : 'Commercial Design'"></h3>
                     <p x-text="language === 'ar' ? 'مساحات تجارية احترافية تعزز هوية علامتك' : 'Professional commercial spaces that enhance your brand identity'"></p>
                 </div>
                 <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="assets/images/Hospitality/project-90.jpeg" alt="خدمة تصميم الضيافة" loading="lazy">
+                    </div>
                     <div class="service-icon">🍽️</div>
                     <h3 x-text="language === 'ar' ? 'الضيافة' : 'Hospitality Design'"></h3>
                     <p x-text="language === 'ar' ? 'تصميم مطاعم وفنادق استثنائية' : 'Design for exceptional restaurants and hotels'"></p>
                 </div>
                 <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="assets/images/Furniture/furniture-12.jpeg" alt="خدمة الأثاث المخصص" loading="lazy">
+                    </div>
                     <div class="service-icon">🪑</div>
                     <h3 x-text="language === 'ar' ? 'أثاث مخصص' : 'Custom Furniture'"></h3>
                     <p x-text="language === 'ar' ? 'تصميم وتصنيع أثاث فاخر حسب الطلب' : 'Design and production of bespoke luxury furniture'"></p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card-image">
+                        <img src="images/image_9_27.png" alt="خدمة الكرفانات" loading="lazy">
+                    </div>
+                    <div class="service-icon">🚐</div>
+                    <h3 x-text="language === 'ar' ? 'كرفانات' : 'Caravans'"></h3>
+                    <p x-text="language === 'ar'
+                        ? 'تصميم وتجهيز كرفانات سكنية ومكتبية وحراسة ووحدات استقبال عملية.'
+                        : 'Design and fit-out of residential, office, guard and reception caravans.'"></p>
                 </div>
             </div>
         </div>
@@ -1883,6 +2326,47 @@
         </div>
     </section>
 
+    <!-- قسم المهارات -->
+    <section class="skills-section" x-show="activeTab === 'about' || activeTab === 'services'">
+        <div class="container">
+            <div class="skills-grid">
+                <div class="skills-image-wrapper">
+                    <img src="images/residential-10.jpeg" alt="رسم ونمذجة تصميم داخلي" loading="lazy">
+                </div>
+                <div class="skills-content">
+                    <h3 x-text="language === 'ar' ? 'مهارات فريق Artrova Studio' : 'Artrova Studio team skills'"></h3>
+                    <div class="skill-item">
+                        <div class="skill-label-row">
+                            <span x-text="language === 'ar' ? 'رسم داخلي (Interior Sketch)' : 'Interior Sketch'"></span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" data-skill="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row">
+                            <span x-text="language === 'ar' ? 'نمذجة ثلاثية الأبعاد (3D Modeling)' : '3D Modeling'"></span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" data-skill="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row">
+                            <span x-text="language === 'ar' ? 'تخطيط ثنائي الأبعاد (2D Planning)' : '2D Planning'"></span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" data-skill="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- قسم الاتصال -->
     <section id="contact" class="contact-section" x-show="activeTab === 'contact'">
         <div class="container">
@@ -1949,6 +2433,19 @@
                     </div>
                     <button type="submit" class="btn btn-primary submit-btn" x-text="language === 'ar' ? 'إرسال الرسالة' : 'Send Message'"></button>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الدعوة لاتخاذ إجراء (CTA) -->
+    <section class="cta-section" x-show="activeTab === 'home' || activeTab === 'about' || activeTab === 'services'">
+        <div class="container">
+            <div class="cta-inner">
+                <h2 class="cta-title" x-text="language === 'ar' ? 'احصل على تصميم داخلي متكامل لمشروعك القادم' : 'Get a complete interior design for your next project'"></h2>
+                <p class="cta-text" x-text="language === 'ar' 
+                    ? 'سواء كنت تعمل على فيلا سكنية، مكتب تجاري، أو مشروع ضيافة، فريق Artrova Studio جاهز لمساعدتك من أول فكرة حتى التسليم.'
+                    : 'Whether you are working on a residential villa, commercial office or hospitality project, the Artrova Studio team is ready to support you from the first idea to handover.'"></p>
+                <a href="#contact" class="btn btn-primary" x-text="language === 'ar' ? 'تواصل معنا الآن' : 'Contact us now'"></a>
             </div>
         </div>
     </section>
@@ -2022,6 +2519,85 @@
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
         </svg>
     </a>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                new Swiper('.hero-new-swiper', {
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.hero-new-pagination',
+                        clickable: true,
+                    },
+                    effect: 'slide',
+                    grabCursor: true,
+                });
+            } catch (e) {
+                console.warn('Swiper init error', e);
+            }
+
+            // Counter section animation
+            var counterSection = document.querySelector('.counter-section');
+            var numbers = document.querySelectorAll('.counter-number');
+            var countersStarted = false;
+
+            function startCounters() {
+                if (countersStarted) return;
+                countersStarted = true;
+
+                numbers.forEach(function (el) {
+                    var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+                    var current = 0;
+                    var step = Math.max(1, Math.floor(target / 80));
+
+                    var interval = setInterval(function () {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(interval);
+                        }
+                        el.textContent = current + (target >= 10 ? '+' : '');
+                    }, 20);
+                });
+            }
+
+            if (counterSection && numbers.length) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            startCounters();
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                observer.observe(counterSection);
+            }
+
+            // Skills section progress bars animation
+            var skillsSection = document.querySelector('.skills-section');
+            if (skillsSection) {
+                var skillsObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            skillsSection.classList.add('skills-animate');
+                            skillsObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                skillsObserver.observe(skillsSection);
+            }
+        });
+    </script>
 
 </body>
 </html>
