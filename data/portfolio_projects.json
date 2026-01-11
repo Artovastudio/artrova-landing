@@ -4,7 +4,7 @@
   "projects": [
     {
       "slug": "residential",
-      "titleAr": null,
+      "titleAr": "Ø³ÙƒÙ†ÙŠ",
       "titleEn": "Residential",
       "title": "Residential",
       "images": [
@@ -80,7 +80,7 @@
     },
     {
       "slug": "hospitality",
-      "titleAr": null,
+      "titleAr": "Ø¶ÙŠØ§ÙØ©",
       "titleEn": "Hospitality",
       "title": "Hospitality",
       "images": [
@@ -104,7 +104,7 @@
     },
     {
       "slug": "furniture",
-      "titleAr": null,
+      "titleAr": "Ø£Ø«Ø§Ø«",
       "titleEn": "Furniture",
       "title": "Furniture",
       "images": [
